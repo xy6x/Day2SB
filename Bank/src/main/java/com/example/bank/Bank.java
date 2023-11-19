@@ -33,28 +33,22 @@ public class Bank {
         tasks.remove(index);
         return tasks;
     }
-    @PutMapping("/Deposit/{index}")
-    public ArrayList<BankManagement> Deposit(@PathVariable int index, @RequestBody double balance) {
-        for (BankManagement b:tasks
-             ) {
-            b.setBalance(b.getBalance()+balance);
-        }
+    @PutMapping("/Deposit/{index}/{pus}")
+    public ArrayList<BankManagement> Deposit(@PathVariable int index, @PathVariable double pus) {
+
+        tasks.get(index).setBalance(tasks.get(index).getBalance()+pus);
 
 
         return tasks;
 }
-    @PutMapping("/Withdraw/{index}")
-    public ArrayList<BankManagement> Withdraw(@PathVariable int index, @RequestBody BankManagement ban) {
-        double salary = ban.getBalance();
+    @PutMapping("/Withdraw/{index}/{pus}")
+    public ArrayList<BankManagement> Withdraw(@PathVariable int index, @PathVariable double pus) {
 
-        for (BankManagement ba:tasks
-             ) {
-            if (ba.getBalance() > salary) {
-                ba.setBalance(ba.getBalance()-salary);
+        if (tasks.get(index).getBalance()>=pus)
+        {
+            tasks.get(index).setBalance(tasks.get(index).getBalance() - pus);
+        }else System.out.println("Balance not allowed");
 
-            }else System.out.println("Balance not allowed");
-
-        }
 
 
         return tasks;
