@@ -44,8 +44,19 @@ public class Bank {
         return tasks;
 }
     @PutMapping("/Withdraw/{index}")
-    public ArrayList<BankManagement> Withdraw(@PathVariable int index, @RequestBody BankManagement bankManagement) {
-        tasks.set(index, bankManagement);
+    public ArrayList<BankManagement> Withdraw(@PathVariable int index, @RequestBody BankManagement ban) {
+        double salary = ban.getBalance();
+
+        for (BankManagement ba:tasks
+             ) {
+            if (ba.getBalance() > salary) {
+                ba.setBalance(ba.getBalance()-salary);
+
+            }else System.out.println("Balance not allowed");
+
+        }
+
+
         return tasks;
     }
 }
